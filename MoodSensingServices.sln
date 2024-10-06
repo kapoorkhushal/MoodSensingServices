@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{FADB1263-18E2-4DAE-A9B5-0F5A2912B74B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{C6A77336-9A97-49C8-9C17-DF2D18313F48}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{11564606-7129-4B93-889D-C5A692D849D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{698AB40A-88F0-48EE-B896-868DEA1499C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodSensingServices.WebApi", "MoodSensingServices.WebApi\MoodSensingServices.WebApi.csproj", "{CF18EE71-2B5F-45B4-9496-440C90CF5369}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodSensingServices.Infrastructure", "MoodSensingServices.Infrastructure\MoodSensingServices.Infrastructure.csproj", "{5333484C-7F74-49A0-B2B4-78A0679BAC5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodSensingServices.Domain", "MoodSensingServices.Domain\MoodSensingServices.Domain.csproj", "{A0BF6587-0478-4902-A59A-E97C81B6638B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodSensingServices.Application", "MoodSensingServices.Application\MoodSensingServices.Application.csproj", "{6C32C3D7-C130-4FA0-B682-388B55A53E17}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF18EE71-2B5F-45B4-9496-440C90CF5369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF18EE71-2B5F-45B4-9496-440C90CF5369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF18EE71-2B5F-45B4-9496-440C90CF5369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF18EE71-2B5F-45B4-9496-440C90CF5369}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5333484C-7F74-49A0-B2B4-78A0679BAC5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5333484C-7F74-49A0-B2B4-78A0679BAC5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5333484C-7F74-49A0-B2B4-78A0679BAC5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5333484C-7F74-49A0-B2B4-78A0679BAC5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0BF6587-0478-4902-A59A-E97C81B6638B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0BF6587-0478-4902-A59A-E97C81B6638B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0BF6587-0478-4902-A59A-E97C81B6638B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0BF6587-0478-4902-A59A-E97C81B6638B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C32C3D7-C130-4FA0-B682-388B55A53E17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C32C3D7-C130-4FA0-B682-388B55A53E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C32C3D7-C130-4FA0-B682-388B55A53E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C32C3D7-C130-4FA0-B682-388B55A53E17}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C6A77336-9A97-49C8-9C17-DF2D18313F48} = {FADB1263-18E2-4DAE-A9B5-0F5A2912B74B}
+		{11564606-7129-4B93-889D-C5A692D849D0} = {FADB1263-18E2-4DAE-A9B5-0F5A2912B74B}
+		{698AB40A-88F0-48EE-B896-868DEA1499C9} = {FADB1263-18E2-4DAE-A9B5-0F5A2912B74B}
+		{CF18EE71-2B5F-45B4-9496-440C90CF5369} = {C6A77336-9A97-49C8-9C17-DF2D18313F48}
+		{5333484C-7F74-49A0-B2B4-78A0679BAC5A} = {698AB40A-88F0-48EE-B896-868DEA1499C9}
+		{A0BF6587-0478-4902-A59A-E97C81B6638B} = {11564606-7129-4B93-889D-C5A692D849D0}
+		{6C32C3D7-C130-4FA0-B682-388B55A53E17} = {11564606-7129-4B93-889D-C5A692D849D0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CC720DBD-42CD-40EF-8BF1-168C2126CF5C}
+	EndGlobalSection
+EndGlobal
