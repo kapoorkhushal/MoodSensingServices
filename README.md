@@ -1,1 +1,1 @@
-# MoodSensingServices
+Scaffold-DbContext "Server=IN-910D5S3; Database=MoodSensing; Integrated Security=SSPI; Trusted_Connection=True; TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities -ContextDir Context -Context "MSAContext" -f
