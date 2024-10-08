@@ -28,11 +28,7 @@ public partial class MSAContext : DbContext
     {
         modelBuilder.Entity<Location>(entity =>
         {
-            entity.HasKey(e => e.LocationId);
-
             entity.ToTable("Location");
-
-            entity.Property(e => e.LocationId).ValueGeneratedNever();
         });
 
         modelBuilder.Entity<User>(entity =>

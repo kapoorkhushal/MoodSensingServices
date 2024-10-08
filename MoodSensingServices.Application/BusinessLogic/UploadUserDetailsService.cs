@@ -37,11 +37,13 @@ namespace MoodSensingServices.Application.BusinessLogic
 
                 var user = new User
                 {
+                    Id = Guid.NewGuid(),
                     UserId = input.UserId,
                     Image = createdImageName,
                     Mood = mood,
                     Location = new Location
                     {
+                        LocationId = Guid.NewGuid(),
                         Latitude = input.Latitude,
                         Longitude = input.Longitude
                     }

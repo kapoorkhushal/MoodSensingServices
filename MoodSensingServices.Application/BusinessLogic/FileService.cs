@@ -28,14 +28,14 @@ namespace MoodSensingServices.Application.BusinessLogic
             }
 
             // Check the allowed extenstions
-            var ext = Path.GetExtension(imageFile.FileName);
-            if (!allowedFileExtensions.Contains(ext))
+            var extension = Path.GetExtension(imageFile.FileName);
+            if (!allowedFileExtensions.Contains(extension))
             {
                 throw new BadImageFormatException($"Only {string.Join(",", allowedFileExtensions)} are allowed.");
             }
 
             // generate a unique filename
-            var fileName = $"{Guid.NewGuid().ToString()}{ext}";
+            var fileName = $"{Guid.NewGuid().ToString()}{extension}";
             var fileNameWithPath = Path.Combine(path, fileName);
             using var stream = new FileStream(fileNameWithPath, FileMode.Create);
             await imageFile.CopyToAsync(stream);

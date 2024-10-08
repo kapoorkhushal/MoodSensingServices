@@ -9,8 +9,6 @@ public partial class User
 
     public Guid UserId { get; set; }
 
-    public Guid LocationId { get; set; }
-
     public int Mood { get; set; }
 
     public string Image { get; set; } = null!;
@@ -18,6 +16,8 @@ public partial class User
     public DateTime CreationDate { get; set; }
 
     public DateTime ModifiedDate { get; set; }
+
+    public Guid LocationId { get; set; }
 
     public virtual Location Location { get; set; } = null!;
 }

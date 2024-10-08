@@ -15,7 +15,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/v1/moodFrequency?userId=a6c20e51-cb8f-4b9a-8dff-481492ffe603",
+					"raw": "http://localhost:5000/api/v1/moodFrequency?userId=9a880d9d-8671-4e61-89d4-e5690a786152",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -29,7 +29,7 @@
 					"query": [
 						{
 							"key": "userId",
-							"value": "a6c20e51-cb8f-4b9a-8dff-481492ffe603"
+							"value": "9a880d9d-8671-4e61-89d4-e5690a786152"
 						}
 					]
 				}
@@ -94,7 +94,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/v1/happyLocation?userId=a6c20e51-cb8f-4b9a-8dff-481492ffe603&latitude=31&longitude=46",
+					"raw": "http://localhost:5000/api/v1/happyLocation?userId=9a880d9d-8671-4e61-89d4-e5690a786152&latitude=31&longitude=46",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -108,7 +108,7 @@
 					"query": [
 						{
 							"key": "userId",
-							"value": "a6c20e51-cb8f-4b9a-8dff-481492ffe603"
+							"value": "9a880d9d-8671-4e61-89d4-e5690a786152"
 						},
 						{
 							"key": "latitude",
