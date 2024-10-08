@@ -22,7 +22,7 @@ namespace MoodSensingServices.Application.Handler
         /// <returns></returns>
         public async Task<IGetClosestHappyLocationOutputDTO?> Handle(GetClosestHappyLocationRequest closestHappyLocationRequest, CancellationToken cancellationToken)
         {
-            return await _locationService.GetClosestHappyMood(closestHappyLocationRequest.userId, closestHappyLocationRequest.latitude, closestHappyLocationRequest.longitude).ConfigureAwait(false);
+            return await _locationService.GetClosestHappyMoodAsync(closestHappyLocationRequest.userId, closestHappyLocationRequest.latitude, closestHappyLocationRequest.longitude).ConfigureAwait(false);
         }
     }
 }

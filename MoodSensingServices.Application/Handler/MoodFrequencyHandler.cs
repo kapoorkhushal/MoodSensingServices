@@ -22,7 +22,7 @@ namespace ServiceProviders.Application.Features
         /// <returns></returns>
         public async Task<List<IGetMoodFrequencyOutputDTO>> Handle(GetAllMoodFrequenciesRequest moodFrequenciesRequest, CancellationToken cancellationToken)
         {
-            return await _moodOperationService.GetMoodFrequencies(moodFrequenciesRequest.userId).ConfigureAwait(false);
+            return await _moodOperationService.GetMoodFrequenciesAsync(moodFrequenciesRequest.userId).ConfigureAwait(false);
         }
     }
 }

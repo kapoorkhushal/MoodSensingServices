@@ -13,9 +13,9 @@ namespace MoodSensingServices.Application.BusinessLogic
         }
 
         /// <inheritdoc />
-        public async Task<IGetClosestHappyLocationOutputDTO?> GetClosestHappyMood(Guid userId, string latitude, string longitude)
+        public async Task<IGetClosestHappyLocationOutputDTO?> GetClosestHappyMoodAsync(Guid userId, string latitude, string longitude)
         {
-            var userMoodFrequency = await _moodOperationService.GetMoodFrequencies(userId).ConfigureAwait(false);
+            var userMoodFrequency = await _moodOperationService.GetMoodFrequenciesAsync(userId).ConfigureAwait(false);
 
             IGetClosestHappyLocationOutputDTO? output = null;
             if (userMoodFrequency.Any())
