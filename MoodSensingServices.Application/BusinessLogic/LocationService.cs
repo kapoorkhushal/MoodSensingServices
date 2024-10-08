@@ -13,13 +13,19 @@ namespace MoodSensingServices.Application.BusinessLogic
         }
 
         /// <inheritdoc />
-        public async Task<IGetClosestHappyLocationOutputDTO> GetClosestHappyMood(Guid userId, string latitude, string longitude)
+        public async Task<IGetClosestHappyLocationOutputDTO?> GetClosestHappyMood(Guid userId, string latitude, string longitude)
         {
             var userMoodFrequency = await _moodOperationService.GetMoodFrequencies(userId).ConfigureAwait(false);
 
-            return userMoodFrequency
+            IGetClosestHappyLocationOutputDTO? output = null;
+            if (userMoodFrequency.Any())
+            {
+                output = userMoodFrequency
                 .Where(x => string.Equals(x.MoodType, MoodTypeConstants.Happy))
                 .OrderBy(x => GetMinDistance(double.Parse(latitude), double.Parse(longitude), double.Parse(x.Latitude ?? string.Empty), double.Parse(x.Longitude ?? string.Empty))).First().GetClosestHappyLocationOutput();
+            }
+
+            return output;
         }
 
         /// <summary>

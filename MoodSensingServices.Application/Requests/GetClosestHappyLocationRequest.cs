@@ -3,7 +3,7 @@ using MoodSensingServices.Domain.DTOs;
 
 namespace MoodSensingServices.Application.Requests
 {
-    public class GetClosestHappyLocationRequest : IRequest<IGetClosestHappyLocationOutputDTO>
+    public class GetClosestHappyLocationRequest : IRequest<IGetClosestHappyLocationOutputDTO?>
     {
         public Guid userId { get; set; }
         public string latitude { get; set; }

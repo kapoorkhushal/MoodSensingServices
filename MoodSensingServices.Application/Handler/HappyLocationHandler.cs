@@ -5,7 +5,7 @@ using MoodSensingServices.Domain.DTOs;
 
 namespace MoodSensingServices.Application.Handler
 {
-    public class HappyLocationHandler : IRequestHandler<GetClosestHappyLocationRequest, IGetClosestHappyLocationOutputDTO>
+    public class HappyLocationHandler : IRequestHandler<GetClosestHappyLocationRequest, IGetClosestHappyLocationOutputDTO?>
     {
         private readonly ILocationService _locationService;
 
@@ -20,7 +20,7 @@ namespace MoodSensingServices.Application.Handler
         /// <param name="closestHappyLocationRequest"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<IGetClosestHappyLocationOutputDTO> Handle(GetClosestHappyLocationRequest closestHappyLocationRequest, CancellationToken cancellationToken)
+        public async Task<IGetClosestHappyLocationOutputDTO?> Handle(GetClosestHappyLocationRequest closestHappyLocationRequest, CancellationToken cancellationToken)
         {
             return await _locationService.GetClosestHappyMood(closestHappyLocationRequest.userId, closestHappyLocationRequest.latitude, closestHappyLocationRequest.longitude).ConfigureAwait(false);
         }

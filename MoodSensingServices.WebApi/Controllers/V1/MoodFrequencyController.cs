@@ -17,12 +17,14 @@ namespace MoodSensingServices.WebApi.Controllers.V1
         /// <summary>
         /// Get the list of mood frequencies
         /// </summary>
-        /// <param name="pincode"></param>
-        /// <param name="id"></param>
+        /// <param name="userId"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet]
         [MapToApiVersion("1.0")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetMoodFrequencies([FromQuery] string userId, CancellationToken cancellationToken)
         {
             var moodFrequencyRequest = new GetAllMoodFrequenciesRequest(userId);

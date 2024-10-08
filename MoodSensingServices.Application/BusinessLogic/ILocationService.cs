@@ -11,6 +11,6 @@ namespace MoodSensingServices.Application.BusinessLogic
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
         /// <returns></returns>
-        Task<IGetClosestHappyLocationOutputDTO> GetClosestHappyMood(Guid userId, string latitude, string longitude);
+        Task<IGetClosestHappyLocationOutputDTO?> GetClosestHappyMood(Guid userId, string latitude, string longitude);
     }
 }

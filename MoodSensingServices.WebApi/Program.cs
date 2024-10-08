@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using MoodSensingServices.Application.BusinessLogic;
+using MoodSensingServices.Application.Extensions;
+using MoodSensingServices.Application.Handler;
 using MoodSensingServices.Application.Interfaces;
 using MoodSensingServices.Domain.Settings;
 using MoodSensingServices.Infrastructure;
@@ -11,8 +14,8 @@ using Polly;
 using Polly.Contrib.WaitAndRetry;
 using Polly.Extensions.Http;
 using Polly.Wrap;
+using ServiceProviders.Application.Features;
 using System.Diagnostics;
-using System.Reflection;
 
 public static class Program
 {
@@ -78,6 +81,12 @@ public static class Program
     // This method gets called by the runtime. Use this method to add services to the container.
     private static void ConfigureServices(IServiceCollection services, IWebHostEnvironment environment)
     {
+        services.AddMediatR(congif => congif.RegisterServicesFromAssembly(typeof(Program).Assembly));
+        foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+        {
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assembly));
+        }
+        services.AddApplicationServices();
         ConfigureOptions(services);
         // TODO: Authentication
         //ConfigureAuthentication(services);
