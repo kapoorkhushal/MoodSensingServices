@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MoodSensingServices.Application.Extensions;
 using MoodSensingServices.Application.Interfaces;
@@ -13,6 +15,7 @@ using Polly.Contrib.WaitAndRetry;
 using Polly.Extensions.Http;
 using Polly.Wrap;
 using System.Diagnostics;
+using System.Text;
 
 public static class Program
 {
@@ -62,6 +65,32 @@ public static class Program
 
         Configuration = builder.Configuration;
 
+        #region authorization
+        //var authSettings = Configuration.GetSection("AuthorizationSettings").Get<AuthorizationSettings>();
+
+        //// Add JWT Authentication service
+        //builder.Services.AddAuthentication(options =>
+        //{
+        //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        //})
+        //.AddJwtBearer(options =>
+        //{
+        //    options.TokenValidationParameters = new TokenValidationParameters
+        //    {
+        //        ValidateIssuer = true,
+        //        ValidateAudience = true,
+        //        ValidateLifetime = false,
+        //        ValidateIssuerSigningKey = true,
+        //        ValidIssuer = authSettings.ValidIssuer,
+        //        ValidAudience = authSettings.ValidAudience,
+        //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authSettings.SecretKey))
+        //    };
+        //});
+
+        //builder.Services.AddAuthorization(); // Add authorization services
+
+        #endregion
         ConfigureServices(builder.Services, builder.Environment);
 
         var app = builder.Build();
