@@ -28,10 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MoodSensingServices.Application\MoodSensingServices.Application.csproj" />
     <ProjectReference Include="..\MoodSensingServices.Infrastructure\MoodSensingServices.Infrastructure.csproj" />
   </ItemGroup>
