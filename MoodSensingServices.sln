@@ -11,13 +11,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{11564606-7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{698AB40A-88F0-48EE-B896-868DEA1499C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodSensingServices.WebApi", "MoodSensingServices.WebApi\MoodSensingServices.WebApi.csproj", "{CF18EE71-2B5F-45B4-9496-440C90CF5369}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodSensingServices.WebApi", "MoodSensingServices.WebApi\MoodSensingServices.WebApi.csproj", "{CF18EE71-2B5F-45B4-9496-440C90CF5369}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodSensingServices.Infrastructure", "MoodSensingServices.Infrastructure\MoodSensingServices.Infrastructure.csproj", "{5333484C-7F74-49A0-B2B4-78A0679BAC5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodSensingServices.Infrastructure", "MoodSensingServices.Infrastructure\MoodSensingServices.Infrastructure.csproj", "{5333484C-7F74-49A0-B2B4-78A0679BAC5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodSensingServices.Domain", "MoodSensingServices.Domain\MoodSensingServices.Domain.csproj", "{A0BF6587-0478-4902-A59A-E97C81B6638B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodSensingServices.Domain", "MoodSensingServices.Domain\MoodSensingServices.Domain.csproj", "{A0BF6587-0478-4902-A59A-E97C81B6638B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodSensingServices.Application", "MoodSensingServices.Application\MoodSensingServices.Application.csproj", "{6C32C3D7-C130-4FA0-B682-388B55A53E17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodSensingServices.Application", "MoodSensingServices.Application\MoodSensingServices.Application.csproj", "{6C32C3D7-C130-4FA0-B682-388B55A53E17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{69F26B82-39F2-4891-B86B-9E577D9A3642}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		version.props = version.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

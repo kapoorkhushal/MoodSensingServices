@@ -103,7 +103,6 @@ public static class Program
 
         // TODO: Add logging middleware
         //app.UseMiddleware<LoggingMiddleware>();
-        app.UseExceptionHandler();
         app.UseRouting();
         app.UseCors(AllowSpecificOrigins);
         app.UseAuthentication();
