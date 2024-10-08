@@ -28,14 +28,22 @@ public partial class MSAContext : DbContext
     {
         modelBuilder.Entity<Location>(entity =>
         {
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.HasKey(e => e.LocationId);
+
+            entity.ToTable("Location");
+
+            entity.Property(e => e.LocationId).ValueGeneratedNever();
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasIndex(e => e.LocationId, "IX_Users_LocationId");
+            entity.HasKey(e => e.UserId);
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.ToTable("User");
+
+            entity.HasIndex(e => e.LocationId, "IX_User_LocationId");
+
+            entity.Property(e => e.UserId).ValueGeneratedNever();
 
             entity.HasOne(d => d.Location).WithMany(p => p.Users).HasForeignKey(d => d.LocationId);
         });
