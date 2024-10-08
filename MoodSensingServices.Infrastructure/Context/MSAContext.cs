@@ -37,13 +37,11 @@ public partial class MSAContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId);
-
             entity.ToTable("User");
 
             entity.HasIndex(e => e.LocationId, "IX_User_LocationId");
 
-            entity.Property(e => e.UserId).ValueGeneratedNever();
+            entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.Location).WithMany(p => p.Users).HasForeignKey(d => d.LocationId);
         });

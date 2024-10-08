@@ -21,5 +21,17 @@ namespace MoodSensingServices.Domain.Extensions
 
             return result;
         }
+
+        /// <summary>
+        /// Generate random number between 0 to 100
+        /// </summary>
+        /// <returns></returns>
+        public static int GetMood()
+        {
+            Random rng = new Random();
+
+            // number between 0 and 99
+            return rng.Next(100); 
+        }
     }
 }

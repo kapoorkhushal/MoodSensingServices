@@ -1,4 +1,5 @@
-﻿using MoodSensingServices.Application.Entities;
+﻿using Microsoft.AspNetCore.Http;
+using MoodSensingServices.Application.Entities;
 using MoodSensingServices.Application.Interfaces;
 using MoodSensingServices.Domain.DTOs;
 using MoodSensingServices.Domain.Extensions;
@@ -17,6 +18,11 @@ namespace MoodSensingServices.Application.BusinessLogic
         public async Task<List<IGetMoodFrequencyOutputDTO>> GetMoodFrequenciesAsync(Guid userId)
         {
             var users = await _userRepository.GetAll(user => user.UserId == userId).ConfigureAwait(false);
+
+            if(users is null || users.Count == 0)
+            {
+                throw new BadHttpRequestException("User not found", StatusCodes.Status400BadRequest);
+            }
 
             var output = new List<IGetMoodFrequencyOutputDTO>();
             foreach (var user in users) 

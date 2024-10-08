@@ -37,6 +37,55 @@
 			"response": []
 		},
 		{
+			"name": "UploadImage",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "ImageFile",
+							"type": "file",
+							"src": "/C:/Users/khushalkapoor/OneDrive - Nagarro/Pictures/IMG_8413.jpg"
+						},
+						{
+							"key": "UserId",
+							"value": "9a880d9d-8671-4e61-89d4-e5690a786152",
+							"type": "text"
+						},
+						{
+							"key": "Latitude",
+							"value": "35",
+							"type": "text"
+						},
+						{
+							"key": "Longitude",
+							"value": "46",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/UploadImage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"UploadImage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get Closest Happy Location",
 			"request": {
 				"auth": {
