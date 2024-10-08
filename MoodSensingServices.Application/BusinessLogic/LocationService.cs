@@ -1,4 +1,5 @@
-﻿using MoodSensingServices.Domain.DTOs;
+﻿using MoodSensingServices.Domain.Constants;
+using MoodSensingServices.Domain.DTOs;
 using MoodSensingServices.Domain.Mapper;
 
 namespace MoodSensingServices.Application.BusinessLogic
@@ -16,7 +17,9 @@ namespace MoodSensingServices.Application.BusinessLogic
         {
             var userMoodFrequency = await _moodOperationService.GetMoodFrequencies(userId).ConfigureAwait(false);
 
-            return userMoodFrequency.OrderBy(x => GetMinDistance(double.Parse(latitude), double.Parse(longitude), double.Parse(x.Latitude), double.Parse(x.Longitude))).First().GetClosestHappyLocationOutput();
+            return userMoodFrequency
+                .Where(x => string.Equals(x.MoodType, MoodTypeConstants.Happy))
+                .OrderBy(x => GetMinDistance(double.Parse(latitude), double.Parse(longitude), double.Parse(x.Latitude ?? string.Empty), double.Parse(x.Longitude ?? string.Empty))).First().GetClosestHappyLocationOutput();
         }
 
         /// <summary>
