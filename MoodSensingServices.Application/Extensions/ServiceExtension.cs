@@ -9,6 +9,11 @@ namespace MoodSensingServices.Application.Extensions
     {
         public static void AddApplicationServices(this IServiceCollection services)
         {
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assembly));
+            }
+
             services.AddScoped<HappyLocationHandler>();
             services.AddScoped<MoodFrequencyHandler>();
             services.AddScoped<ILocationService, LocationService>();
