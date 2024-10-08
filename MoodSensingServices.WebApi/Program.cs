@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using MoodSensingServices.Application.Interfaces;
 using MoodSensingServices.Domain.Settings;
+using MoodSensingServices.Infrastructure;
 using MoodSensingServices.Infrastructure.Context;
 using Newtonsoft.Json;
 using Polly;
@@ -10,6 +12,7 @@ using Polly.Contrib.WaitAndRetry;
 using Polly.Extensions.Http;
 using Polly.Wrap;
 using System.Diagnostics;
+using System.Reflection;
 
 public static class Program
 {
@@ -163,8 +166,7 @@ public static class Program
         string connectionString = Configuration["ConnectionString"];
 
         services.AddDbContext<MSAContext>(options => options.UseSqlServer(connectionString).UseLazyLoadingProxies(), ServiceLifetime.Scoped);
-        // TODO: add repository service
-        //services.AddScoped(typeof(IRepository), typeof(Repository));
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
     }
 
     /// <summary>
