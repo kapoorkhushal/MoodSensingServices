@@ -99,7 +99,7 @@ public static class Program
         {
             foreach (var apiVersionDescription in apiVersionDescriptionProvider.ApiVersionDescriptions)
             {
-                setupAction.SwaggerEndpoint($"/swagger/v{apiVersionDescription.ApiVersion.MajorVersion}/swagger.json",
+                setupAction.SwaggerEndpoint($"/swagger/{apiVersionDescription.GroupName}/swagger.json",
                     $"{apiVersionDescription.GroupName}");
                 setupAction.RoutePrefix = "";
             }
