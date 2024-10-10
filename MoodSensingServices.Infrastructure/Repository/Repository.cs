@@ -81,7 +81,7 @@ namespace MoodSensingServices.Infrastructure
         /// <inheritdoc />
         public virtual async Task Add(T entity)
         {
-            _context.Set<T>().Add(entity);
+            await _context.Set<T>().AddAsync(entity).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

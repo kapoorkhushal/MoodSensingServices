@@ -32,7 +32,7 @@ namespace MoodSensingServices.Application.BusinessLogic
                     throw new BadHttpRequestException("File size should not exceed 1 MB", StatusCodes.Status400BadRequest);
                 }
 
-                string createdImageName = await _fileService.SaveFileAsync(input.ImageFile, allowedFileExtentions);
+                string createdImageName = await _fileService.SaveFileAsync(input.ImageFile!, allowedFileExtentions);
                 var mood = MoodTypeExtension.GetMood();
 
                 var user = new User
@@ -44,8 +44,8 @@ namespace MoodSensingServices.Application.BusinessLogic
                     Location = new Location
                     {
                         LocationId = Guid.NewGuid(),
-                        Latitude = input.Latitude,
-                        Longitude = input.Longitude
+                        Latitude = input.Latitude!,
+                        Longitude = input.Longitude!
                     }
                 };
 

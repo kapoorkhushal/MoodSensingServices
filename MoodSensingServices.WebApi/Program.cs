@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +22,7 @@ public static class Program
 
     private const string AllowSpecificOrigins = "AllowSpecificOrigins";
     private const string ResiliencePolicy = "ResiliencePolicy";
-    public static IConfiguration Configuration { get; private set; }
+    public static IConfiguration? Configuration { get; private set; }
 
     /// <summary>
     /// The main entry to the application
@@ -65,32 +65,6 @@ public static class Program
 
         Configuration = builder.Configuration;
 
-        #region authorization
-        //var authSettings = Configuration.GetSection("AuthorizationSettings").Get<AuthorizationSettings>();
-
-        //// Add JWT Authentication service
-        //builder.Services.AddAuthentication(options =>
-        //{
-        //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        //})
-        //.AddJwtBearer(options =>
-        //{
-        //    options.TokenValidationParameters = new TokenValidationParameters
-        //    {
-        //        ValidateIssuer = true,
-        //        ValidateAudience = true,
-        //        ValidateLifetime = false,
-        //        ValidateIssuerSigningKey = true,
-        //        ValidIssuer = authSettings.ValidIssuer,
-        //        ValidAudience = authSettings.ValidAudience,
-        //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authSettings.SecretKey))
-        //    };
-        //});
-
-        //builder.Services.AddAuthorization(); // Add authorization services
-
-        #endregion
         ConfigureServices(builder.Services, builder.Environment);
 
         var app = builder.Build();
@@ -110,8 +84,7 @@ public static class Program
         services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(Program).Assembly));
         services.AddApplicationServices();
         ConfigureOptions(services);
-        // TODO: Authentication
-        //ConfigureAuthentication(services);
+        ConfigureAuthentication(services);
         ConfigureBasicServices(services);
         ConfigureDatabase(services);
         AddTransientFailurePolicies(services);
@@ -126,7 +99,7 @@ public static class Program
         {
             foreach (var apiVersionDescription in apiVersionDescriptionProvider.ApiVersionDescriptions)
             {
-                setupAction.SwaggerEndpoint($"/swagger/{apiVersionDescription.GroupName}/swagger.json",
+                setupAction.SwaggerEndpoint($"/swagger/v{apiVersionDescription.ApiVersion.MajorVersion}/swagger.json",
                     $"{apiVersionDescription.GroupName}");
                 setupAction.RoutePrefix = "";
             }
@@ -150,8 +123,46 @@ public static class Program
     private static void ConfigureOptions(IServiceCollection services)
     {
         services.AddOptions();
-        services.Configure<PolicyServiceSettings>(Configuration.GetSection("PolicyServiceSettings"));
-        services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
+        services.Configure<PolicyServiceSettings>(Configuration?.GetSection("PolicyServiceSettings")!);
+        services.Configure<ApplicationSettings>(Configuration?.GetSection("ApplicationSettings")!);
+    }
+
+    private static void ConfigureAuthentication(IServiceCollection services)
+    {
+        var authSettings = Configuration?.GetSection("AuthorizationSettings").Get<AuthorizationSettings>();
+
+        //// Add JWT Authentication service
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = false,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = authSettings?.ValidIssuer,
+                ValidAudience = authSettings?.ValidAudience,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authSettings?.SecretKey!))
+            };
+
+            options.Events = new JwtBearerEvents
+            {
+                OnAuthenticationFailed = context =>
+                {
+                    // Log the error
+                    Console.WriteLine($"Authentication failed: {context.Exception.Message}");
+                    return Task.CompletedTask;
+                }
+            };
+        });
+
+        services.AddAuthorization(); // Add authorization services
     }
 
     /// <summary>
@@ -164,8 +175,13 @@ public static class Program
         services.AddHttpContextAccessor();
         services.AddLocalization(options => options.ResourcesPath = "Resources");
 
+        services.AddLogging(loggingBuilder =>
+        {
+            loggingBuilder.AddConsole();
+        });
+
         // Add CORS
-        var corsAllowedOrigins = Configuration.GetSection("ApplicationSettings:CorsAllowedOrigins").GetChildren().Select(asc => asc.Value).ToArray();
+        var corsAllowedOrigins = Configuration?.GetSection("ApplicationSettings:CorsAllowedOrigins").GetChildren().Select(asc => asc.Value).ToArray() ?? [];
 
         services.AddCors(options =>
         {
@@ -206,8 +222,8 @@ public static class Program
     /// <param name="services"><see cref="IServiceCollection"/> 
     private static void AddTransientFailurePolicies(IServiceCollection services)
     {
-        var policySettings = Configuration.GetSection("PolicyServiceSettings").Get<PolicyServiceSettings>();
-        var delay = Backoff.ExponentialBackoff(initialDelay: TimeSpan.FromMilliseconds(policySettings.BackOffDelayInMilliseconds.GetValueOrDefault()), retryCount: policySettings.RetryCount.GetValueOrDefault(3), fastFirst: false);
+        var policySettings = Configuration?.GetSection("PolicyServiceSettings").Get<PolicyServiceSettings>();
+        var delay = Backoff.ExponentialBackoff(initialDelay: TimeSpan.FromMilliseconds(policySettings!.BackOffDelayInMilliseconds.GetValueOrDefault()), retryCount: policySettings.RetryCount.GetValueOrDefault(3), fastFirst: false);
         var retryPolicy = HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(delay);
         var timeoutPolicy = Policy.TimeoutAsync<HttpResponseMessage>(policySettings.TimeoutInSeconds.GetValueOrDefault(1), Polly.Timeout.TimeoutStrategy.Pessimistic);
 
@@ -233,7 +249,7 @@ public static class Program
     {
         services.AddVersionedApiExplorer(options =>
         {
-            options.GroupNameFormat = "'v'VV";
+            options.GroupNameFormat = "'v'VVV";
             options.SubstituteApiVersionInUrl = true;
         });
 

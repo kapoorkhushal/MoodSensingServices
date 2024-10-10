@@ -25,6 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		version.props = version.props
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{47A4ACAA-13DB-4F38-9B7D-D2BFD0DA3A24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodSensingServices.Test", "MoodSensingServices.Test\MoodSensingServices.Test.csproj", "{DB9CA1A2-3F4D-416F-A1BF-9B79016E20C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,10 @@ Global
 		{6C32C3D7-C130-4FA0-B682-388B55A53E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C32C3D7-C130-4FA0-B682-388B55A53E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C32C3D7-C130-4FA0-B682-388B55A53E17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB9CA1A2-3F4D-416F-A1BF-9B79016E20C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB9CA1A2-3F4D-416F-A1BF-9B79016E20C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB9CA1A2-3F4D-416F-A1BF-9B79016E20C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB9CA1A2-3F4D-416F-A1BF-9B79016E20C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +67,7 @@ Global
 		{5333484C-7F74-49A0-B2B4-78A0679BAC5A} = {698AB40A-88F0-48EE-B896-868DEA1499C9}
 		{A0BF6587-0478-4902-A59A-E97C81B6638B} = {11564606-7129-4B93-889D-C5A692D849D0}
 		{6C32C3D7-C130-4FA0-B682-388B55A53E17} = {11564606-7129-4B93-889D-C5A692D849D0}
+		{DB9CA1A2-3F4D-416F-A1BF-9B79016E20C1} = {47A4ACAA-13DB-4F38-9B7D-D2BFD0DA3A24}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CC720DBD-42CD-40EF-8BF1-168C2126CF5C}

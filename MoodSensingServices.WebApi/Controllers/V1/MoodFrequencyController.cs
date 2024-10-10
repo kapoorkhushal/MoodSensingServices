@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MoodSensingServices.Application.Requests;
 using MoodSensingServices.Webapi.Controllers;
 
@@ -21,6 +22,7 @@ namespace MoodSensingServices.WebApi.Controllers.V1
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         [MapToApiVersion("1.0")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
