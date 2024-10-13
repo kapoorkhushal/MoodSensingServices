@@ -37,7 +37,7 @@ namespace MoodSensingServices.Infrastructure
         }
 
         /// <inheritdoc />
-        public virtual async Task<List<T>> GetAll(Expression<Func<T, bool>> expression)
+        public virtual async Task<IList<T>> GetAll(Expression<Func<T, bool>> expression)
         {
             return await _context.Set<T>()
                 .Where(expression)

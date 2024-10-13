@@ -3,7 +3,7 @@ using MoodSensingServices.Domain.DTOs;
 
 namespace MoodSensingServices.Application.Requests
 {
-    public class GetAllMoodFrequenciesRequest: IRequest<List<IGetMoodFrequencyOutputDTO>>
+    public class GetAllMoodFrequenciesRequest: IRequest<IList<IGetMoodFrequencyOutputDTO>>
     {
         public Guid userId { get; set; }
 

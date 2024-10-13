@@ -15,7 +15,7 @@ namespace MoodSensingServices.Application.BusinessLogic
         }
 
         /// <inheritdoc />
-        public async Task<List<IGetMoodFrequencyOutputDTO>> GetMoodFrequenciesAsync(Guid userId)
+        public async Task<IList<IGetMoodFrequencyOutputDTO>> GetMoodFrequenciesAsync(Guid userId)
         {
             var users = await _userRepository.GetAll(user => user.UserId == userId).ConfigureAwait(false);
 

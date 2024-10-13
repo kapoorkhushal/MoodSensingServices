@@ -9,7 +9,7 @@ namespace MoodSensingServices.Domain.Mapper
         /// </summary>
         /// <param name="moodFrequency"></param>
         /// <returns></returns>
-        public static IGetClosestHappyLocationOutputDTO GetClosestHappyLocationOutput(this IGetMoodFrequencyOutputDTO moodFrequency )
+        public static IGetClosestHappyLocationOutputDTO GetClosestHappyLocationOutput(this IGetMoodFrequencyOutputDTO moodFrequency)
         {
             return new GetClosestHappyLocationOutputDTO
             {

@@ -23,7 +23,7 @@ namespace MoodSensingServices.Application.Interfaces
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
-        Task<List<T>> GetAll(Expression<Func<T, bool>> expression);
+        Task<IList<T>> GetAll(Expression<Func<T, bool>> expression);
 
         /// <summary>
         /// Get all the list of entities

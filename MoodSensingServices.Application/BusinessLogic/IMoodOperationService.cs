@@ -9,6 +9,6 @@ namespace MoodSensingServices.Application.BusinessLogic
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        Task<List<IGetMoodFrequencyOutputDTO>> GetMoodFrequenciesAsync(Guid userId);
+        Task<IList<IGetMoodFrequencyOutputDTO>> GetMoodFrequenciesAsync(Guid userId);
     }
 }

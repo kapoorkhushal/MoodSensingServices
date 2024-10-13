@@ -22,7 +22,9 @@ namespace MoodSensingServices.Application.BusinessLogic
             {
                 output = userMoodFrequency
                 .Where(x => string.Equals(x.MoodType, MoodTypeConstants.Happy))
-                .OrderBy(x => GetMinDistance(double.Parse(latitude), double.Parse(longitude), double.Parse(x.Latitude ?? string.Empty), double.Parse(x.Longitude ?? string.Empty))).First().GetClosestHappyLocationOutput();
+                .OrderBy(x => GetMinDistance(double.Parse(latitude), double.Parse(longitude), double.Parse(x.Latitude ?? string.Empty), double.Parse(x.Longitude ?? string.Empty)))
+                .First()
+                .GetClosestHappyLocationOutput();
             }
 
             return output;

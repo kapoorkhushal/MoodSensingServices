@@ -10,7 +10,14 @@
 			"name": "Get All Mood Frequencies",
 			"request": {
 				"auth": {
-					"type": "bearer"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJpc3MiOiJUZXN0VXNlciIsImF1ZCI6IkFsbCJ9.IOTFoqZeZu_EJtH6qEUWyYX3WQBotzBkRc47lgf0gB8",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
@@ -40,7 +47,14 @@
 			"name": "UploadImage",
 			"request": {
 				"auth": {
-					"type": "bearer"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJpc3MiOiJUZXN0VXNlciIsImF1ZCI6IkFsbCJ9.IOTFoqZeZu_EJtH6qEUWyYX3WQBotzBkRc47lgf0gB8",
+							"type": "string"
+						}
+					]
 				},
 				"method": "POST",
 				"header": [],
@@ -89,7 +103,14 @@
 			"name": "Get Closest Happy Location",
 			"request": {
 				"auth": {
-					"type": "bearer"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJpc3MiOiJUZXN0VXNlciIsImF1ZCI6IkFsbCJ9.IOTFoqZeZu_EJtH6qEUWyYX3WQBotzBkRc47lgf0gB8",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
