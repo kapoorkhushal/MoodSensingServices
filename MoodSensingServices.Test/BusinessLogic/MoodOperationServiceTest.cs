@@ -42,8 +42,8 @@ namespace MoodSensingServices.Test.BusinessLogic
                 async () => await moodOperationService.GetMoodFrequenciesAsync(It.IsAny<Guid>())
             );
             _userRepository.Verify(x => x.GetAll(It.IsAny<Expression<Func<User, bool>>>()), Times.Once);
-            Assert.Equal(exception?.StatusCode, StatusCodes.Status400BadRequest);
-            Assert.Equal(exception?.Message, "User not found");
+            Assert.Equal(StatusCodes.Status400BadRequest, exception?.StatusCode);
+            Assert.Equal("User not found", exception?.Message);
         }
     }
 }
