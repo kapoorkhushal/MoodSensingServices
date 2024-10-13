@@ -6,6 +6,7 @@ Design Pattern: MediatR Pattern
 Architecture: Clean Architecture/Onion Architecture
 DB Approach: Using Code first approach
 DB: SSMS
+Authorization: JWT Bearer
 
 Overview of the App:
 The application is a mood sensing app, which can provide the mood Rate of a user by taking in input the Image.
@@ -20,8 +21,9 @@ Following assumption has been to calculate the mood:
 No 3rd API is used, and a Math Random number is providing with the mood level.
 The Entry is then committed into the DB.
 
-The project is also provisioned to provide CRUD operations, providing with policy handlers, and circuit breaker policy has also been employed
-The project also provides versioning of the APIs.
+The project is also provisioned to provide CRUD operations, providing with policy handlers, and circuit breaker policy has also been employed.
+The project also provides versioning of the APIs, Authorization using JWT tokens & Unit test cases.
+The credentials for token is provided in configurable appsettings.json.
 
 Below is the Scaffold command attached to update the Entities:-
 
