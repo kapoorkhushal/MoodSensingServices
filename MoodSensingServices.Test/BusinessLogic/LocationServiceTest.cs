@@ -1,13 +1,9 @@
-﻿using AutoFixture.Kernel;
-using AutoFixture.Xunit2;
+﻿using AutoFixture.Xunit2;
 using MoodSensingServices.Application.BusinessLogic;
-using MoodSensingServices.Application.Entities;
-using MoodSensingServices.Application.Interfaces;
 using MoodSensingServices.Domain.Constants;
 using MoodSensingServices.Domain.DTOs;
 using MoodSensingServices.Test.Base;
 using Moq;
-using System.Linq.Expressions;
 using Xunit;
 
 namespace MoodSensingServices.Test.BusinessLogic
