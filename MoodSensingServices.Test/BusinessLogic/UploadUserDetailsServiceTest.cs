@@ -16,7 +16,7 @@ namespace MoodSensingServices.Test.BusinessLogic
         public async Task IsUploadImageAsyncOk(
             [Frozen] Mock<IFileService> _fileService,
             [Frozen] Mock<IRepository<User>> _userRepository,
-            UploadUserDetailsService service)
+            UserImageOperationService service)
         {
             // Arrange
             IUploadImageInputDTO input = new UploadImageInputDTO
@@ -41,7 +41,7 @@ namespace MoodSensingServices.Test.BusinessLogic
         public async Task IsUploadImageFileSizeNOkAsync(
             [Frozen] Mock<IFileService> _fileService,
             [Frozen] Mock<IRepository<User>> _userRepository,
-            UploadUserDetailsService service)
+            UserImageOperationService service)
         {
             // Arrange
             IUploadImageInputDTO input = new UploadImageInputDTO

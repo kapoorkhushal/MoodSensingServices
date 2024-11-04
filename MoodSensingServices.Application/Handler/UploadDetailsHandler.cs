@@ -7,8 +7,8 @@ namespace MoodSensingServices.Application.Handler
 {
     public class UploadDetailsHandler : IRequestHandler<UploadUserDetailsRequest, IUploadImageOutputDTO?>
     {
-        private readonly IUploadUserDetailsService _uploadUserDetailsService;
-        public UploadDetailsHandler(IUploadUserDetailsService uploadUserDetailsService)
+        private readonly IUserImageOperationService _uploadUserDetailsService;
+        public UploadDetailsHandler(IUserImageOperationService uploadUserDetailsService)
         {
             _uploadUserDetailsService = uploadUserDetailsService;
         }

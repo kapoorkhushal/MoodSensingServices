@@ -28,7 +28,7 @@ namespace MoodSensingServices.WebApi.Controllers.V1
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UploadDetails([FromForm] UploadImageInputDTO input, CancellationToken cancellationToken)
+        public async Task<IActionResult> UploadDetailsAsync([FromForm] UploadImageInputDTO input, CancellationToken cancellationToken)
         {
             var uploadUserDetailsRequest = new UploadUserDetailsRequest(input);
             var output = await Mediator.Send(uploadUserDetailsRequest, cancellationToken).ConfigureAwait(false);

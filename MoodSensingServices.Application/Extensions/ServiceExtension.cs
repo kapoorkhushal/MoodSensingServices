@@ -17,10 +17,11 @@ namespace MoodSensingServices.Application.Extensions
             services.AddScoped<HappyLocationHandler>();
             services.AddScoped<MoodFrequencyHandler>();
             services.AddScoped<UploadDetailsHandler>();
+            services.AddScoped<HappyImageHandler>();
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<IMoodOperationService, MoodOperationService>();
             services.AddScoped<IFileService, FileService>();
-            services.AddScoped<IUploadUserDetailsService, UploadUserDetailsService>();
+            services.AddScoped<IUserImageOperationService, UserImageOperationService>();
         }
     }
 }

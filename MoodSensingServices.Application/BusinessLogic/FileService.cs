@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using System.Drawing;
 
 namespace MoodSensingServices.Application.BusinessLogic
 {
@@ -40,6 +41,12 @@ namespace MoodSensingServices.Application.BusinessLogic
             using var stream = new FileStream(fileNameWithPath, FileMode.Create);
             await imageFile.CopyToAsync(stream);
             return fileName;
+        }
+
+        /// <inheritdoc />
+        public async Task<Image> GetFileAsync(string fileName)
+        {
+            return null;
         }
     }
 }

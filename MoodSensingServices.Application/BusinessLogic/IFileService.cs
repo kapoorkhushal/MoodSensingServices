@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System.Drawing;
 
 namespace MoodSensingServices.Application.BusinessLogic
 {
@@ -9,7 +10,14 @@ namespace MoodSensingServices.Application.BusinessLogic
         /// </summary>
         /// <param name="file"></param>
         /// <param name="allowedExtensions"></param>
-        /// <returns></returns>
+        /// <returns>returns the name of the newly inserted file as guid</returns>
         Task<string> SaveFileAsync(IFormFile file, string[] allowedExtensions);
+
+        /// <summary>
+        /// get file for the input file name
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns>returns the file by fetching teh file for the input file name</returns>
+        Task<Image> GetFileAsync(string fileName);
     }
 }
