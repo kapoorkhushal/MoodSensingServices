@@ -2,6 +2,6 @@
 {
     public class ApplicationSettings
     {
-        public List<string> CorsAllowedOrigins {  get; set; }
+        public List<string>? CorsAllowedOrigins {  get; set; }
     }
 }
