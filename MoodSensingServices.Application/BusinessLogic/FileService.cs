@@ -1,15 +1,18 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using System.Drawing;
+using Microsoft.AspNetCore.Mvc;
+using MoodSensingServices.Domain.Extensions;
 
 namespace MoodSensingServices.Application.BusinessLogic
 {
     public class FileService: IFileService
     {
         private readonly IWebHostEnvironment _environment;
+        private readonly string _path;
         public FileService(IWebHostEnvironment environment)
         {
             _environment = environment;
+            _path = GetPath();
         }
 
         /// <inheritdoc />
@@ -20,33 +23,54 @@ namespace MoodSensingServices.Application.BusinessLogic
                 throw new ArgumentNullException(nameof(imageFile));
             }
 
-            var contentPath = _environment.ContentRootPath;
-            var path = Path.Combine(contentPath, "Uploads");
-
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(_path))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(_path);
             }
 
             // Check the allowed extenstions
             var extension = Path.GetExtension(imageFile.FileName);
             if (!allowedFileExtensions.Contains(extension))
             {
-                throw new BadImageFormatException($"Only {string.Join(",", allowedFileExtensions)} are allowed.");
+                throw new BadImageFormatException($"Only {string.Join(", ", allowedFileExtensions)} are allowed.");
             }
 
             // generate a unique filename
             var fileName = $"{Guid.NewGuid().ToString()}{extension}";
-            var fileNameWithPath = Path.Combine(path, fileName);
+            var fileNameWithPath = Path.Combine(_path, fileName);
             using var stream = new FileStream(fileNameWithPath, FileMode.Create);
-            await imageFile.CopyToAsync(stream);
+            await imageFile.CopyToAsync(stream).ConfigureAwait(false);
             return fileName;
         }
 
         /// <inheritdoc />
-        public async Task<Image> GetFileAsync(string fileName)
+        public FileStreamResult GetFileAsync(string fileName)
         {
-            return null;
+            // Combine the file name from the database with the uploads folder path
+            string imagePath = Path.Combine(_path, fileName);
+
+            if (!Directory.Exists(_path))
+            {
+                throw new BadHttpRequestException($"directory: {_path} does not exist", new DirectoryNotFoundException());
+            }
+            else if (!File.Exists(imagePath))
+            {
+                throw new BadHttpRequestException($"file: {imagePath} does not exist", new FileNotFoundException());
+            }
+
+            // Open a file stream to the file
+            var fileStream = new FileStream(imagePath, FileMode.Open, FileAccess.Read);
+            return new FileStreamResult(fileStream, fileName.GetContentType());
+        }
+
+        /// <summary>
+        /// returns the absolute path of the directory which will contain the content
+        /// </summary>
+        /// <returns></returns>
+        private string GetPath()
+        {
+            var contentPath = _environment.ContentRootPath;
+            return Path.Combine(contentPath, "Uploads");
         }
     }
 }

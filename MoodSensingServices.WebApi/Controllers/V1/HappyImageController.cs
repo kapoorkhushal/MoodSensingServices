@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MoodSensingServices.Application.Requests;
 using MoodSensingServices.Webapi.Controllers;
-using System.Security.Principal;
 
 namespace MoodSensingServices.WebApi.Controllers.V1
 {
@@ -28,7 +27,6 @@ namespace MoodSensingServices.WebApi.Controllers.V1
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "Now Each system has WINDOWS > 6.0")]
         public async Task<IActionResult> GetHappiestImageAsync([FromQuery] string userId, CancellationToken cancellationToken)
         {
             var happiestImageRequest = new GetHappiestImageRequest(userId);

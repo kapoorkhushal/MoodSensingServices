@@ -1,16 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using MoodSensingServices.Application.BusinessLogic;
 using MoodSensingServices.Application.Requests;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MoodSensingServices.Application.Handler
 {
-    public class HappyImageHandler: IRequestHandler<GetHappiestImageRequest, Image?>
+    public class HappyImageHandler: IRequestHandler<GetHappiestImageRequest, FileStreamResult>
     {
         private readonly IUserImageOperationService _userImageOperationService;
 
@@ -26,10 +21,9 @@ namespace MoodSensingServices.Application.Handler
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
-        public async Task<Image?> Handle(GetHappiestImageRequest request, CancellationToken cancellationToken)
+        public async Task<FileStreamResult> Handle(GetHappiestImageRequest request, CancellationToken cancellationToken)
         {
-            return await _userImageOperationService.GetUserHappiestImageAsync(request.userId, cancellationToken).ConfigureAwait(false);
+            return _userImageOperationService.GetUserHappiestImageAsync(request.userId, cancellationToken);
         }
     }
 }

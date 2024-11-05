@@ -21,7 +21,7 @@ namespace MoodSensingServices.Application.BusinessLogic
 
             if(users is null || users.Count == 0)
             {
-                throw new BadHttpRequestException("User not found", StatusCodes.Status400BadRequest);
+                throw new BadHttpRequestException("User not found");
             }
 
             var output = new List<IGetMoodFrequencyOutputDTO>();

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using MoodSensingServices.Application.Entities;
 using MoodSensingServices.Application.Interfaces;
 using MoodSensingServices.Domain.DTOs;
 using MoodSensingServices.Domain.Extensions;
-using System.Drawing;
 
 namespace MoodSensingServices.Application.BusinessLogic
 {
@@ -65,19 +65,16 @@ namespace MoodSensingServices.Application.BusinessLogic
         }
 
         /// <inheritdoc />
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
-        public async Task<Image?> GetUserHappiestImageAsync(Guid userId, CancellationToken cancellationToken)
+        public FileStreamResult GetUserHappiestImageAsync(Guid userId, CancellationToken cancellationToken)
         {
             var imageFileName = _userRepository.GetById(userId)?.Image;
 
-            Image? result = null;
-
-            if (!string.IsNullOrWhiteSpace(imageFileName)) 
+            if (string.IsNullOrWhiteSpace(imageFileName)) 
             {
-                result = await _fileService.GetFileAsync(imageFileName).ConfigureAwait(false);
+                throw new BadHttpRequestException("No happiest Image found");
             }
 
-            return result;
+            return _fileService.GetFileAsync(imageFileName);
         }
     }
 }

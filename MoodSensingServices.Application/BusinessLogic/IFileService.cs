@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System.Drawing;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MoodSensingServices.Application.BusinessLogic
 {
@@ -18,6 +18,6 @@ namespace MoodSensingServices.Application.BusinessLogic
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns>returns the file by fetching teh file for the input file name</returns>
-        Task<Image> GetFileAsync(string fileName);
+        FileStreamResult GetFileAsync(string fileName);
     }
 }
