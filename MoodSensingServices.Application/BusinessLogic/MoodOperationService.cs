@@ -17,22 +17,22 @@ namespace MoodSensingServices.Application.BusinessLogic
         /// <inheritdoc />
         public async Task<IList<IGetMoodFrequencyOutputDTO>> GetMoodFrequenciesAsync(Guid userId)
         {
-            var users = await _userRepository.GetAll(user => user.UserId == userId).ConfigureAwait(false);
+            var userDetails = await _userRepository.GetAll(user => user.UserId == userId).ConfigureAwait(false);
 
-            if(users is null || users.Count == 0)
+            if(userDetails is null || userDetails.Count == 0)
             {
-                throw new BadHttpRequestException("User not found", StatusCodes.Status400BadRequest);
+                throw new BadHttpRequestException("User not found");
             }
 
             var output = new List<IGetMoodFrequencyOutputDTO>();
-            foreach (var user in users) 
+            foreach (var userDetail in userDetails) 
             {
                 output.Add(
                     new GetMoodFrequencyOutputDTO()
                     {
-                        MoodType = user.Mood.GetMoodType(),
-                        Latitude = user.Location.Latitude,
-                        Longitude = user.Location.Longitude
+                        MoodType = userDetail.Mood.GetMoodType(),
+                        Latitude = userDetail.Location.Latitude,
+                        Longitude = userDetail.Location.Longitude
                     });
             }
 

@@ -14,9 +14,9 @@ namespace MoodSensingServices.Infrastructure
         private readonly string CreationDate = "CreationDate";
         private readonly string ModifiedDate = "ModifiedDate";
 
-        public Repository(IServiceProvider serviceProvider)
+        public Repository(MSAContext context)
         {
-            _context = serviceProvider.CreateScope().ServiceProvider.GetRequiredService<MSAContext>();
+            _context = context;
         }
 
         /// <inheritdoc />

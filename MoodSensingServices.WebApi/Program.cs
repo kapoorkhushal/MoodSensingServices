@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MoodSensingServices.Application.Extensions;
@@ -73,7 +74,7 @@ public static class Program
         var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
         // add service collection to the newly created startup instance.
-        Configure(app, apiVersionDescriptionProvider);
+        Configure(app, apiVersionDescriptionProvider, builder.Environment);
 
         return app;
     }
@@ -92,7 +93,7 @@ public static class Program
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    private static void Configure(IApplicationBuilder app, IApiVersionDescriptionProvider apiVersionDescriptionProvider)
+    private static void Configure(IApplicationBuilder app, IApiVersionDescriptionProvider apiVersionDescriptionProvider, IWebHostEnvironment environment)
     {
         app.UseSwagger();
         app.UseSwaggerUI(setupAction =>
@@ -108,6 +109,11 @@ public static class Program
         // TODO: Add logging middleware
         //app.UseMiddleware<LoggingMiddleware>();
         app.UseRouting();
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(Path.Combine(environment.ContentRootPath, "Uploads")),
+            RequestPath = "/Uploads" // URL path to access files (optional)
+        });
         app.UseCors(AllowSpecificOrigins);
         app.UseAuthentication();
         app.UseAuthorization();

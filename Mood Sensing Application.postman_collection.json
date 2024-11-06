@@ -44,6 +44,43 @@
 			"response": []
 		},
 		{
+			"name": "Get Most Happiest Image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJpc3MiOiJUZXN0VXNlciIsImF1ZCI6IkFsbCJ9.IOTFoqZeZu_EJtH6qEUWyYX3WQBotzBkRc47lgf0gB8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/HappyImage?userId=9a880d9d-8671-4e61-89d4-e5690a786152",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"HappyImage"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "9a880d9d-8671-4e61-89d4-e5690a786152"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "UploadImage",
 			"request": {
 				"auth": {

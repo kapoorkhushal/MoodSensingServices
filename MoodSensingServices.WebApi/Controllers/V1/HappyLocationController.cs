@@ -28,7 +28,7 @@ namespace MoodSensingServices.WebApi.Controllers.V1
         [MapToApiVersion("1.0")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetClosestHappyLocation([FromQuery] string userId, [FromQuery] string latitude, [FromQuery] string longitude, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetClosestHappyLocationAsync([FromQuery] string userId, [FromQuery] string latitude, [FromQuery] string longitude, CancellationToken cancellationToken)
         {
             var moodFrequencyRequest = new GetClosestHappyLocationRequest(userId, latitude, longitude);
             var output = await Mediator.Send(moodFrequencyRequest, cancellationToken).ConfigureAwait(false);
