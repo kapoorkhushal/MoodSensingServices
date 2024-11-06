@@ -17,7 +17,14 @@ namespace MoodSensingServices.Application.BusinessLogic
         /// get file for the input file name
         /// </summary>
         /// <param name="fileName"></param>
-        /// <returns>returns the file by fetching teh file for the input file name</returns>
-        FileStreamResult GetFileAsync(string fileName);
+        /// <returns>returns the file by fetching the file for the input file name</returns>
+        FileStreamResult GetFileStream(string fileName);
+
+        /// <summary>
+        /// get file location for the input file name
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns>returns the full file path by for the input file name</returns>
+        string GetFileAddress(string fileName);
     }
 }

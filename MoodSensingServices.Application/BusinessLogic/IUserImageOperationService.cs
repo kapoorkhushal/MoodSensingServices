@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MoodSensingServices.Domain.DTOs;
+﻿using MoodSensingServices.Domain.DTOs;
 
 namespace MoodSensingServices.Application.BusinessLogic
 {
@@ -19,6 +18,6 @@ namespace MoodSensingServices.Application.BusinessLogic
         /// <param name="userId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>returns the most happiest image of the user</returns>
-        Task<FileStreamResult> GetUserHappiestImageAsync(Guid userId, CancellationToken cancellationToken);
+        Task<string> GetUserHappiestImageAsync(Guid userId, CancellationToken cancellationToken);
     }
 }

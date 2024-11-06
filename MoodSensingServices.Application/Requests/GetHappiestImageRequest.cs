@@ -1,9 +1,8 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace MoodSensingServices.Application.Requests
 {
-    public class GetHappiestImageRequest: IRequest<FileStreamResult>
+    public class GetHappiestImageRequest: IRequest<string>
     {
         public Guid userId { get; set; }
 

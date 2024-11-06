@@ -1,11 +1,10 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using MoodSensingServices.Application.BusinessLogic;
 using MoodSensingServices.Application.Requests;
 
 namespace MoodSensingServices.Application.Handler
 {
-    public class HappyImageHandler: IRequestHandler<GetHappiestImageRequest, FileStreamResult>
+    public class HappyImageHandler: IRequestHandler<GetHappiestImageRequest, string>
     {
         private readonly IUserImageOperationService _userImageOperationService;
 
@@ -21,7 +20,7 @@ namespace MoodSensingServices.Application.Handler
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<FileStreamResult> Handle(GetHappiestImageRequest request, CancellationToken cancellationToken)
+        public async Task<string> Handle(GetHappiestImageRequest request, CancellationToken cancellationToken)
         {
             return await _userImageOperationService.GetUserHappiestImageAsync(request.userId, cancellationToken).ConfigureAwait(false);
         }

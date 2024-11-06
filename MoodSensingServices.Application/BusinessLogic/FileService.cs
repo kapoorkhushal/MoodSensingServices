@@ -44,7 +44,7 @@ namespace MoodSensingServices.Application.BusinessLogic
         }
 
         /// <inheritdoc />
-        public FileStreamResult GetFileAsync(string fileName)
+        public FileStreamResult GetFileStream(string fileName)
         {
             // Combine the file name from the database with the uploads folder path
             string imagePath = Path.Combine(_path, fileName);
@@ -61,6 +61,13 @@ namespace MoodSensingServices.Application.BusinessLogic
             // Open a file stream to the file
             var fileStream = new FileStream(imagePath, FileMode.Open, FileAccess.Read);
             return new FileStreamResult(fileStream, fileName.GetContentType());
+        }
+
+        /// <inheritdoc />
+        public string GetFileAddress(string fileName)
+        {
+            // Combine the file name from the database with the uploads folder path
+            return string.Concat("http://localhost:5000/Uploads/", fileName);
         }
 
         /// <summary>
