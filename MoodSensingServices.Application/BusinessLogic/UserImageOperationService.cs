@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MoodSensingServices.Application.Entities;
 using MoodSensingServices.Application.Interfaces;
+using MoodSensingServices.Domain.Constants;
 using MoodSensingServices.Domain.DTOs;
 using MoodSensingServices.Domain.Extensions;
 
@@ -65,16 +66,20 @@ namespace MoodSensingServices.Application.BusinessLogic
         }
 
         /// <inheritdoc />
-        public FileStreamResult GetUserHappiestImageAsync(Guid userId, CancellationToken cancellationToken)
+        public async Task<FileStreamResult> GetUserHappiestImageAsync(Guid userId, CancellationToken cancellationToken)
         {
-            var imageFileName = _userRepository.GetById(userId)?.Image;
+            var userDetails = await _userRepository.GetAll(user => user.UserId == userId).ConfigureAwait(false);
+            var happiestImageFileName = userDetails
+                ?.Where(user => string.Equals(user.Mood.GetMoodType(), MoodTypeConstants.Happy))
+                .MaxBy(x => x.Mood)
+                ?.Image;
 
-            if (string.IsNullOrWhiteSpace(imageFileName)) 
+            if (string.IsNullOrWhiteSpace(happiestImageFileName)) 
             {
                 throw new BadHttpRequestException("No happiest Image found");
             }
 
-            return _fileService.GetFileAsync(imageFileName);
+            return _fileService.GetFileAsync(happiestImageFileName);
         }
     }
 }

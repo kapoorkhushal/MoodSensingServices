@@ -23,7 +23,7 @@ namespace MoodSensingServices.Application.Handler
         /// <exception cref="NotImplementedException"></exception>
         public async Task<FileStreamResult> Handle(GetHappiestImageRequest request, CancellationToken cancellationToken)
         {
-            return _userImageOperationService.GetUserHappiestImageAsync(request.userId, cancellationToken);
+            return await _userImageOperationService.GetUserHappiestImageAsync(request.userId, cancellationToken).ConfigureAwait(false);
         }
     }
 }
