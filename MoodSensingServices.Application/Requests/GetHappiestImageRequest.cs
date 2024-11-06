@@ -1,8 +1,9 @@
 ﻿using MediatR;
+using MoodSensingServices.Domain.DTOs;
 
 namespace MoodSensingServices.Application.Requests
 {
-    public class GetHappiestImageRequest: IRequest<string>
+    public class GetHappiestImageRequest: IRequest<IGetHappiestImageOutputDTO>
     {
         public Guid userId { get; set; }
 

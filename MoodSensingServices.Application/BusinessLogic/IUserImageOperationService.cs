@@ -17,7 +17,7 @@ namespace MoodSensingServices.Application.BusinessLogic
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns>returns the most happiest image of the user</returns>
+        /// <returns>returns the most happiest image url of the user</returns>
         Task<string> GetUserHappiestImageAsync(Guid userId, CancellationToken cancellationToken);
     }
 }

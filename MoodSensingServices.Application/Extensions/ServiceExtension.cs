@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MoodSensingServices.Application.BusinessLogic;
-using MoodSensingServices.Application.Handler;
-using ServiceProviders.Application.Features;
 
 namespace MoodSensingServices.Application.Extensions
 {
@@ -14,10 +12,6 @@ namespace MoodSensingServices.Application.Extensions
                 services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assembly));
             }
 
-            services.AddScoped<HappyLocationHandler>();
-            services.AddScoped<MoodFrequencyHandler>();
-            services.AddScoped<UploadDetailsHandler>();
-            services.AddScoped<HappyImageHandler>();
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<IMoodOperationService, MoodOperationService>();
             services.AddScoped<IFileService, FileService>();

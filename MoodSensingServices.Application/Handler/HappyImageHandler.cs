@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using MoodSensingServices.Application.BusinessLogic;
 using MoodSensingServices.Application.Requests;
+using MoodSensingServices.Domain.DTOs;
 
 namespace MoodSensingServices.Application.Handler
 {
-    public class HappyImageHandler: IRequestHandler<GetHappiestImageRequest, string>
+    public class HappyImageHandler: IRequestHandler<GetHappiestImageRequest, IGetHappiestImageOutputDTO>
     {
         private readonly IUserImageOperationService _userImageOperationService;
 
@@ -20,9 +21,14 @@ namespace MoodSensingServices.Application.Handler
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<string> Handle(GetHappiestImageRequest request, CancellationToken cancellationToken)
+        public async Task<IGetHappiestImageOutputDTO> Handle(GetHappiestImageRequest request, CancellationToken cancellationToken)
         {
-            return await _userImageOperationService.GetUserHappiestImageAsync(request.userId, cancellationToken).ConfigureAwait(false);
+            var imageUrl = await _userImageOperationService.GetUserHappiestImageAsync(request.userId, cancellationToken).ConfigureAwait(false);
+
+            return new GetHappiestImageOutputDTO
+            {
+                ImagePath = imageUrl
+            };
         }
     }
 }
