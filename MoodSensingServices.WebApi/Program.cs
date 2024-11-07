@@ -4,12 +4,14 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.IO;
 using Microsoft.OpenApi.Models;
 using MoodSensingServices.Application.Extensions;
 using MoodSensingServices.Application.Interfaces;
 using MoodSensingServices.Domain.Settings;
 using MoodSensingServices.Infrastructure;
 using MoodSensingServices.Infrastructure.Context;
+using MoodSensingServices.WebApi.Middleware;
 using Newtonsoft.Json;
 using Polly;
 using Polly.Contrib.WaitAndRetry;
@@ -108,8 +110,7 @@ public static class Program
             }
         });
 
-        // TODO: Add logging middleware
-        //app.UseMiddleware<LoggingMiddleware>();
+        app.UseMiddleware<LoggingMiddleware>();
         app.UseRouting();
         app.UseStaticFiles(new StaticFileOptions
         {
@@ -183,6 +184,7 @@ public static class Program
         services.AddHttpContextAccessor();
         services.AddLocalization(options => options.ResourcesPath = "Resources");
 
+        services.AddSingleton<RecyclableMemoryStreamManager>();
         services.AddLogging(loggingBuilder =>
         {
             loggingBuilder.AddConsole();
