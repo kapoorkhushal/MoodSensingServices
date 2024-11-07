@@ -86,7 +86,6 @@ public static class Program
     // This method gets called by the runtime. Use this method to add services to the container.
     private static void ConfigureServices(IServiceCollection services, IWebHostEnvironment environment)
     {
-        services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(Program).Assembly));
         ConfigureOptions(services);
         services.AddApplicationServices();
         ConfigureAuthentication(services);

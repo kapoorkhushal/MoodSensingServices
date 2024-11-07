@@ -10,9 +10,9 @@ namespace MoodSensingServices.Application.BusinessLogic
     public class FileService: IFileService
     {
         private readonly IWebHostEnvironment _environment;
-        private readonly string _path;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ApplicationSettings _applicationSettings;
+        private readonly string _path;
 
         public FileService(IWebHostEnvironment environment,
             IHttpContextAccessor httpContextAccessor,
@@ -81,14 +81,14 @@ namespace MoodSensingServices.Application.BusinessLogic
                 throw new BadHttpRequestException("request url not found");
             }
 
-            // Combine the file name from the database with the uploads folder path
+            // Combine the file name with the hosted URL & uploads folder path
             return $"{request.Scheme}://{request.Host}/{_applicationSettings.FileDirectory!}/{fileName}";
         }
 
         /// <summary>
         /// returns the absolute path of the directory which will contain the content
         /// </summary>
-        /// <returns></returns>
+        /// <returns>returns directory path</returns>
         private string GetPath()
         {
             var contentPath = _environment.ContentRootPath;

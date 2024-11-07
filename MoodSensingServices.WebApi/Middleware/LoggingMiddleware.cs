@@ -1,5 +1,4 @@
 ﻿using Microsoft.IO;
-using System.Net;
 using System.Text;
 
 namespace MoodSensingServices.WebApi.Middleware
@@ -50,7 +49,7 @@ namespace MoodSensingServices.WebApi.Middleware
                 // Call the next middleware in the pipeline
                 await _requestDelegate(context);
 
-                // create copy of stream, because, stream is getting disposed after fetching the response body
+                // Create copy of stream, because, stream is getting disposed after fetching the response body
                 var preservedStream = new MemoryStream();
                 responseBodyStream.Seek(0, SeekOrigin.Begin);
                 responseBodyStream.CopyTo(preservedStream);
