@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using MoodSensingServices.Domain.Extensions;
+using MoodSensingServices.Domain.Settings;
 
 namespace MoodSensingServices.Application.BusinessLogic
 {
@@ -9,9 +11,16 @@ namespace MoodSensingServices.Application.BusinessLogic
     {
         private readonly IWebHostEnvironment _environment;
         private readonly string _path;
-        public FileService(IWebHostEnvironment environment)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ApplicationSettings _applicationSettings;
+
+        public FileService(IWebHostEnvironment environment,
+            IHttpContextAccessor httpContextAccessor,
+            IOptions<ApplicationSettings> applicationSettingsOptions)
         {
             _environment = environment;
+            _httpContextAccessor = httpContextAccessor;
+            _applicationSettings = applicationSettingsOptions.Value;
             _path = GetPath();
         }
 
@@ -66,8 +75,14 @@ namespace MoodSensingServices.Application.BusinessLogic
         /// <inheritdoc />
         public string GetFileAddress(string fileName)
         {
+            var request = _httpContextAccessor.HttpContext?.Request;
+            if (request == null)
+            {
+                throw new BadHttpRequestException("request url not found");
+            }
+
             // Combine the file name from the database with the uploads folder path
-            return string.Concat("http://localhost:5000/Uploads/", fileName);
+            return $"{request.Scheme}://{request.Host}/{_applicationSettings.FileDirectory!}/{fileName}";
         }
 
         /// <summary>
@@ -77,7 +92,7 @@ namespace MoodSensingServices.Application.BusinessLogic
         private string GetPath()
         {
             var contentPath = _environment.ContentRootPath;
-            return Path.Combine(contentPath, "Uploads");
+            return Path.Combine(contentPath, _applicationSettings.FileDirectory!);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using MoodSensingServices.Application.BusinessLogic;
 
 namespace MoodSensingServices.Application.Extensions
@@ -12,6 +13,7 @@ namespace MoodSensingServices.Application.Extensions
                 services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assembly));
             }
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<IMoodOperationService, MoodOperationService>();
             services.AddScoped<IFileService, FileService>();

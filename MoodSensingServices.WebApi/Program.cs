@@ -24,12 +24,13 @@ public static class Program
     private const string AllowSpecificOrigins = "AllowSpecificOrigins";
     private const string ResiliencePolicy = "ResiliencePolicy";
     public static IConfiguration? Configuration { get; private set; }
+    public static ApplicationSettings? ApplicationSettings { get; private set; }
 
     /// <summary>
     /// The main entry to the application
     /// </summary>
     /// <param name="args">array of arguements</param>
-    /// <returns>Representing asynchro</returns>
+    /// <returns>Representing asynchronous</returns>
     public static async Task Main(string[] args)
     {
         Activity.DefaultIdFormat = ActivityIdFormat.W3C;
@@ -65,6 +66,7 @@ public static class Program
             .UseShutdownTimeout(TimeSpan.FromSeconds(10));
 
         Configuration = builder.Configuration;
+        ApplicationSettings = Configuration?.GetSection("ApplicationSettings").Get<ApplicationSettings>();
 
         ConfigureServices(builder.Services, builder.Environment);
 
@@ -83,8 +85,8 @@ public static class Program
     private static void ConfigureServices(IServiceCollection services, IWebHostEnvironment environment)
     {
         services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(Program).Assembly));
-        services.AddApplicationServices();
         ConfigureOptions(services);
+        services.AddApplicationServices();
         ConfigureAuthentication(services);
         ConfigureBasicServices(services);
         ConfigureDatabase(services);
@@ -111,8 +113,8 @@ public static class Program
         app.UseRouting();
         app.UseStaticFiles(new StaticFileOptions
         {
-            FileProvider = new PhysicalFileProvider(Path.Combine(environment.ContentRootPath, "Uploads")),
-            RequestPath = "/Uploads" // URL path to access files (optional)
+            FileProvider = new PhysicalFileProvider(Path.Combine(environment.ContentRootPath, ApplicationSettings?.FileDirectory!)),
+            RequestPath = $"/{ApplicationSettings?.FileDirectory}" // URL path to access files (optional)
         });
         app.UseCors(AllowSpecificOrigins);
         app.UseAuthentication();
@@ -187,14 +189,14 @@ public static class Program
         });
 
         // Add CORS
-        var corsAllowedOrigins = Configuration?.GetSection("ApplicationSettings:CorsAllowedOrigins").GetChildren().Select(asc => asc.Value).ToArray() ?? [];
+        var corsAllowedOrigins = ApplicationSettings!.CorsAllowedOrigins?.ToArray() ?? [];
 
         services.AddCors(options =>
         {
             options.AddPolicy(AllowSpecificOrigins,
             builder =>
             {
-                builder.WithOrigins(corsAllowedOrigins as string[])
+                builder.WithOrigins(corsAllowedOrigins)
                     .SetIsOriginAllowedToAllowWildcardSubdomains()
                     .AllowAnyMethod()
                     .AllowAnyHeader()

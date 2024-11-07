@@ -8,7 +8,7 @@ namespace MoodSensingServices.Domain.Extensions
         /// get mood type as per the input mood value
         /// </summary>
         /// <param name="moodValue"></param>
-        /// <returns></returns>
+        /// <returns>returns mood type string</returns>
         public static string GetMoodType(this int moodValue)
         {
             string result = moodValue switch
@@ -25,7 +25,7 @@ namespace MoodSensingServices.Domain.Extensions
         /// <summary>
         /// Generate random number between 0 to 100
         /// </summary>
-        /// <returns></returns>
+        /// <returns>random integer number</returns>
         public static int GetMood()
         {
             Random rng = new Random();
