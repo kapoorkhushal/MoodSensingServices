@@ -8,7 +8,7 @@ namespace MoodSensingServices.Application.BusinessLogic
         /// Get list of mood frequencies as per input user id
         /// </summary>
         /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <returns>returns list of location coordinates & it's corresponding mood</returns>
         Task<IList<IGetMoodFrequencyOutputDTO>> GetMoodFrequenciesAsync(Guid userId);
     }
 }
